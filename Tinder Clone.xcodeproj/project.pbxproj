@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		31677FC925BA683100702814 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31677FC825BA683100702814 /* AppDelegate.swift */; };
 		31677FCB25BA683100702814 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31677FCA25BA683100702814 /* SceneDelegate.swift */; };
-		31677FD025BA683100702814 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31677FCE25BA683100702814 /* Main.storyboard */; };
 		31677FD225BA683200702814 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31677FD125BA683200702814 /* Assets.xcassets */; };
 		31677FD525BA683200702814 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31677FD325BA683200702814 /* LaunchScreen.storyboard */; };
 		31677FE025BA683200702814 /* Tinder_CloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31677FDF25BA683200702814 /* Tinder_CloneTests.swift */; };
 		31677FEB25BA683200702814 /* Tinder_CloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31677FEA25BA683200702814 /* Tinder_CloneUITests.swift */; };
 		3167801425BA6B5400702814 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167801325BA6B5400702814 /* HomeVC.swift */; };
 		3167801925BA6CC200702814 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167801825BA6CC200702814 /* Extensions.swift */; };
+		3167802525BA6F9400702814 /* HomeNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167802425BA6F9400702814 /* HomeNavigationStackView.swift */; };
 		91F3288EAD52593A8050C88F /* libPods-Tinder Clone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30F1C0FEA8B2951F468514A5 /* libPods-Tinder Clone.a */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +42,6 @@
 		31677FC525BA683100702814 /* Tinder Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tinder Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31677FC825BA683100702814 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31677FCA25BA683100702814 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		31677FCF25BA683100702814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		31677FD125BA683200702814 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31677FD425BA683200702814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31677FD625BA683200702814 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		31677FEC25BA683200702814 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3167801325BA6B5400702814 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		3167801825BA6CC200702814 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		3167802425BA6F9400702814 /* HomeNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationStackView.swift; sourceTree = "<group>"; };
 		BD6C6D809E56A3EC8A914E6D /* Pods-Tinder Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder Clone.release.xcconfig"; path = "Target Support Files/Pods-Tinder Clone/Pods-Tinder Clone.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +116,7 @@
 		31677FC725BA683100702814 /* Tinder Clone */ = {
 			isa = PBXGroup;
 			children = (
-				31677FFD25BA68BD00702814 /* Model */,
+				3167802325BA6F7500702814 /* Model */,
 				31677FFC25BA68BD00702814 /* View */,
 				31677FFB25BA68B400702814 /* ViewModel */,
 				3167800B25BA6ACC00702814 /* Controller */,
@@ -124,7 +124,6 @@
 				3167800C25BA6AEF00702814 /* Units */,
 				31677FC825BA683100702814 /* AppDelegate.swift */,
 				31677FCA25BA683100702814 /* SceneDelegate.swift */,
-				31677FCE25BA683100702814 /* Main.storyboard */,
 				31677FD125BA683200702814 /* Assets.xcassets */,
 				31677FD325BA683200702814 /* LaunchScreen.storyboard */,
 				31677FD625BA683200702814 /* Info.plist */,
@@ -161,16 +160,9 @@
 		31677FFC25BA68BD00702814 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3167802425BA6F9400702814 /* HomeNavigationStackView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		31677FFD25BA68BD00702814 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Model;
-			path = "New Group1/Model";
 			sourceTree = "<group>";
 		};
 		3167800925BA6AC800702814 /* New Group */ = {
@@ -203,13 +195,19 @@
 			path = Units;
 			sourceTree = "<group>";
 		};
+		3167802325BA6F7500702814 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D0B93753E6D66910BC9FA6AA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				2D4F3993C3B354703F395A5D /* Pods-Tinder Clone.debug.xcconfig */,
 				BD6C6D809E56A3EC8A914E6D /* Pods-Tinder Clone.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -319,7 +317,6 @@
 			files = (
 				31677FD525BA683200702814 /* LaunchScreen.storyboard in Resources */,
 				31677FD225BA683200702814 /* Assets.xcassets in Resources */,
-				31677FD025BA683100702814 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +368,7 @@
 			files = (
 				3167801425BA6B5400702814 /* HomeVC.swift in Sources */,
 				31677FC925BA683100702814 /* AppDelegate.swift in Sources */,
+				3167802525BA6F9400702814 /* HomeNavigationStackView.swift in Sources */,
 				31677FCB25BA683100702814 /* SceneDelegate.swift in Sources */,
 				3167801925BA6CC200702814 /* Extensions.swift in Sources */,
 			);
@@ -408,14 +406,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		31677FCE25BA683100702814 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				31677FCF25BA683100702814 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		31677FD325BA683200702814 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
