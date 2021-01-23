@@ -87,6 +87,7 @@ class CardView: UIView {
             let rotaionalTransform = CGAffineTransform(rotationAngle: angle)
             self.transform = rotaionalTransform.translatedBy(x: translation.x, y: translation.y)
         case .ended:
+            resetCardPosition(sender: sender)
             print("DEBUG:- ended")
         default: break
         }
@@ -97,5 +98,12 @@ class CardView: UIView {
     }
     
     // MARK:- Helpers
-    
+    func resetCardPosition(sender: UIPanGestureRecognizer) {
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.transform = .identity
+        }) { _ in
+            
+        }
+    }
 }
