@@ -24,6 +24,8 @@
 		3167806125BCC08800702814 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167806025BCC08800702814 /* SignInVC.swift */; };
 		3167806A25BCC74300702814 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167806925BCC74300702814 /* UITextField+.swift */; };
 		3167806F25BCC92600702814 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167806E25BCC92600702814 /* CustomTextField.swift */; };
+		3167807725BCCB4600702814 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167807625BCCB4600702814 /* CustomButton.swift */; };
+		3167807C25BCD96400702814 /* AuthenticationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3167807B25BCD96400702814 /* AuthenticationVM.swift */; };
 		91F3288EAD52593A8050C88F /* libPods-Tinder Clone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30F1C0FEA8B2951F468514A5 /* libPods-Tinder Clone.a */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,8 @@
 		3167806025BCC08800702814 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		3167806925BCC74300702814 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		3167806E25BCC92600702814 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		3167807625BCCB4600702814 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		3167807B25BCD96400702814 /* AuthenticationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVM.swift; sourceTree = "<group>"; };
 		BD6C6D809E56A3EC8A914E6D /* Pods-Tinder Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder Clone.release.xcconfig"; path = "Target Support Files/Pods-Tinder Clone/Pods-Tinder Clone.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				3167804925BBFFE000702814 /* CardVM.swift */,
+				3167807B25BCD96400702814 /* AuthenticationVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -230,6 +235,7 @@
 			children = (
 				3167806925BCC74300702814 /* UITextField+.swift */,
 				3167806E25BCC92600702814 /* CustomTextField.swift */,
+				3167807625BCCB4600702814 /* CustomButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -402,9 +408,11 @@
 				3167804025BAA93500702814 /* CardView.swift in Sources */,
 				3167801425BA6B5400702814 /* HomeVC.swift in Sources */,
 				3167806A25BCC74300702814 /* UITextField+.swift in Sources */,
+				3167807725BCCB4600702814 /* CustomButton.swift in Sources */,
 				31677FC925BA683100702814 /* AppDelegate.swift in Sources */,
 				3167806125BCC08800702814 /* SignInVC.swift in Sources */,
 				3167806F25BCC92600702814 /* CustomTextField.swift in Sources */,
+				3167807C25BCD96400702814 /* AuthenticationVM.swift in Sources */,
 				3167805925BCC07D00702814 /* LogInVC.swift in Sources */,
 				3167802525BA6F9400702814 /* HomeNavigationStackView.swift in Sources */,
 				3167804525BBFF4C00702814 /* User.swift in Sources */,

@@ -9,14 +9,20 @@ import UIKit
 
 class LogInVC: UIViewController {
     // MARK:- Properties
+    private let viewModel = LogInVM()
+    
     private let logoImageView = UIImageView()
     private let stackView = UIStackView()
     private let emailTextField = CustomTextField(placeholder: "email")
     private let passwordTextField = CustomTextField(placeholder: "password", type: .password)
+    private let logInButtton = CustomButton(title: "Log In", type: .system)
+    private let signInButton = UIButton()
     
     // MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureGradientLayer()
+        configureTextFieldObservers()
         configureUI()
     }
     
@@ -25,12 +31,6 @@ class LogInVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
         view.backgroundColor = .orange
-        
-        let gradientLayer = CAGradientLayer()
-        view.layer.addSublayer(gradientLayer)
-        gradientLayer.colors = [#colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1).cgColor, #colorLiteral(red: 0.6622132659, green: 0, blue: 0.08407194167, alpha: 1).cgColor]
-        gradientLayer.locations = [0, 1]
-        gradientLayer.frame = view.frame
         
         view.addSubview(logoImageView)
         logoImageView.image = #imageLiteral(resourceName: "app_icon").withRenderingMode(.alwaysTemplate)
@@ -60,7 +60,56 @@ class LogInVC: UIViewController {
             make.height.equalTo(50)
         }
         
+        stackView.addArrangedSubview(logInButtton)
+        logInButtton.addTarget(self, action: #selector(handleLogIn), for: .touchUpInside)
+        logInButtton.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
+        
+        view.addSubview(signInButton)
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 14)])
+        attributedTitle.append(NSMutableAttributedString(string: "Sign In", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 16)]))
+        signInButton.setAttributedTitle(attributedTitle, for: .normal)
+        signInButton.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
+        signInButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.left.equalToSuperview().offset(32)
+            make.right.equalToSuperview().offset(-32)
+        }
     }
     
     // MARK:- Helpers
+    func checkFormStatus() {
+        if viewModel.formIsValid {
+            logInButtton.isEnabled = true
+            logInButtton.backgroundColor = #colorLiteral(red: 0.6622132659, green: 0, blue: 0.08407194167, alpha: 1)
+        } else {
+            logInButtton.isEnabled = false
+            logInButtton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        }
+    }
+    
+    // MARK:- Selectors
+    @objc func handleLogIn() {
+        
+    }
+    
+    @objc func handleSignIn() {
+        navigationController?.pushViewController(SignInVC(), animated: true)
+    }
+    
+    func configureTextFieldObservers() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+    
+    @objc func textDidChange(sender: UITextField) {
+        guard let text = sender.text else { return }
+        if sender == emailTextField {
+            viewModel.email = text
+        } else {
+            viewModel.password = text
+        }
+        checkFormStatus()
+    }
 }
