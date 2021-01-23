@@ -18,9 +18,24 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureCards()
     }
     
     // MARK:- Configure
+    private func configureCards() {
+        let cardView1 = CardView()
+        let cardView2 = CardView()
+        
+        deckView.addSubview(cardView1)
+        cardView1.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
+        deckView.addSubview(cardView2)
+        cardView2.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
+    }
+    
     private func configureUI() {
         view.backgroundColor = .white
         deckView.backgroundColor = .systemPink
