@@ -84,7 +84,6 @@ class CardView: UIView {
     @objc func handlelPanGesture(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
-            print("DEBUG:- began")
             superview?.subviews.forEach({
                 $0.layer.removeAllAnimations()
             })
@@ -92,7 +91,6 @@ class CardView: UIView {
             panCard(sender: sender)
         case .ended:
             resetCardPosition(sender: sender)
-            print("DEBUG:- ended")
         default: break
         }
     }
@@ -101,6 +99,13 @@ class CardView: UIView {
         let location = sender.location(in: nil).x
         let shouldShowNextPhoto = location > self.frame.width / 2
         
+        if shouldShowNextPhoto {
+            viewModel.showNextPhoto()
+        } else {
+            viewModel.showPreviousPhoto()
+        }
+        
+        profileImageView.image = viewModel.imageToShow
     }
     
     // MARK:- Helpers
