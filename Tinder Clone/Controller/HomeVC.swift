@@ -23,8 +23,10 @@ class HomeVC: UIViewController {
     
     // MARK:- Configure
     private func configureCards() {
-        let cardView1 = CardView()
-        let cardView2 = CardView()
+        let user1 = User(name: "Cat cat", age: 20, images: [#imageLiteral(resourceName: "jane1"),#imageLiteral(resourceName: "jane3")])
+        let user2 = User(name: "Dog Dog", age: 21, images: [#imageLiteral(resourceName: "kelly1"),#imageLiteral(resourceName: "kelly2"),#imageLiteral(resourceName: "lady5c")])
+        let cardView1 = CardView(viewModel: CardVM(user: user1))
+        let cardView2 = CardView(viewModel: CardVM(user: user2))
         
         deckView.addSubview(cardView1)
         cardView1.snp.makeConstraints { make in

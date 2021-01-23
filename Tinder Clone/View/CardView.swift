@@ -7,16 +7,24 @@
 
 import UIKit
 
+enum SwipeDirection: Int {
+    case left = -1
+    case right = 1
+}
+
 class CardView: UIView {
     // MARK:- Properties
+    private let viewModel: CardVM
+    
     private let gradientLayer = CAGradientLayer()
     private let profileImageView = UIImageView()
     private let infoLabel = UILabel()
     private let infoButton = UIButton()
     
     // MARK:- Lifecycles
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: CardVM) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         configureGestureRecognizers()
         configureUI()
     }
@@ -45,7 +53,7 @@ class CardView: UIView {
         
         addSubview(profileImageView)
         profileImageView.contentMode = .scaleAspectFill
-        profileImageView.image = #imageLiteral(resourceName: "lady4c")
+        profileImageView.image = viewModel.user.images.first
         profileImageView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }
@@ -56,9 +64,7 @@ class CardView: UIView {
         
         addSubview(infoLabel)
         infoLabel.numberOfLines = 2
-        let attributedText = NSMutableAttributedString(string: "Name Name", attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy), .foregroundColor: UIColor.white])
-        attributedText.append(NSMutableAttributedString(string: " 20", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light), .foregroundColor: UIColor.white]))
-        infoLabel.attributedText = attributedText
+        infoLabel.attributedText = viewModel.userInfoText
         infoLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
@@ -76,16 +82,14 @@ class CardView: UIView {
     
     // MARK:- Actions
     @objc func handlelPanGesture(sender: UIPanGestureRecognizer) {
-        let translation = sender.translation(in: nil)
-        
         switch sender.state {
         case .began:
             print("DEBUG:- began")
+            superview?.subviews.forEach({
+                $0.layer.removeAllAnimations()
+            })
         case .changed:
-            let degrees: CGFloat = translation.x / 20
-            let angle = degrees * .pi / 180
-            let rotaionalTransform = CGAffineTransform(rotationAngle: angle)
-            self.transform = rotaionalTransform.translatedBy(x: translation.x, y: translation.y)
+            panCard(sender: sender)
         case .ended:
             resetCardPosition(sender: sender)
             print("DEBUG:- ended")
@@ -94,16 +98,38 @@ class CardView: UIView {
     }
     
     @objc func handleChangePhoto(sender: UITapGestureRecognizer) {
-        print("DEBUG:- tapped")
+        let location = sender.location(in: nil).x
+        let shouldShowNextPhoto = location > self.frame.width / 2
+        
     }
     
     // MARK:- Helpers
+    func panCard(sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: nil)
+        let degrees: CGFloat = translation.x / 20
+        let angle = degrees * .pi / 180
+        let rotaionalTransform = CGAffineTransform(rotationAngle: angle)
+        self.transform = rotaionalTransform.translatedBy(x: translation.x, y: translation.y)
+    }
+    
     func resetCardPosition(sender: UIPanGestureRecognizer) {
+        let direction: SwipeDirection = sender.translation(in: nil).x > 100 ? .right : .left
+        let shouldDismissCard = abs(sender.translation(in: nil).x) > 100
+        
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: { [weak self] in
             guard let strongSelf = self else { return }
-            strongSelf.transform = .identity
-        }) { _ in
             
+            if shouldDismissCard {
+                let xTranslation = CGFloat(direction.rawValue) * 1000
+                let offScreenTransform = strongSelf.transform.translatedBy(x: xTranslation, y: 0)
+            } else {
+                strongSelf.transform = .identity
+            }
+        }) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            if shouldDismissCard {
+                strongSelf.removeFromSuperview()
+            }
         }
     }
 }
