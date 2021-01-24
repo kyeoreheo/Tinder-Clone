@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 enum SwipeDirection: Int {
     case left = -1
@@ -48,12 +49,12 @@ class CardView: UIView {
     
     func configureUI() {
         backgroundColor = .purple
-        layer.cornerRadius = 10
+        layer.cornerRadius = 5
         clipsToBounds = true
         
         addSubview(profileImageView)
         profileImageView.contentMode = .scaleAspectFill
-        profileImageView.image = viewModel.user.images.first
+        profileImageView.sd_setImage(with: viewModel.imageURL)
         profileImageView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }

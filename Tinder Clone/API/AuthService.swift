@@ -35,7 +35,7 @@ class AuthService {
                             "imageURL": imageURL,
                             "uid": uid,
                             "age": 21] as [String: Any]
-                Firestore.firestore().collection("users").document(uid).setData(data, completion: completion)
+                COLLECTION_USERS.document(uid).setData(data, completion: completion)
             }
         }
     }
