@@ -48,6 +48,7 @@ class HomeVC: UIViewController {
         deckView.backgroundColor = .systemPink
         deckView.layer.cornerRadius = 5
         
+        topStack.delegate = self
         let stackView = UIStackView(arrangedSubviews: [topStack, deckView, bottomStack])
         stackView.axis = .vertical
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -101,5 +102,17 @@ class HomeVC: UIViewController {
             nav.modalPresentationStyle = .fullScreen
             strongSelf.present(nav, animated: true)
         }
+    }
+}
+
+extension HomeVC: HomeNavigationStackViewDelegate {
+    func showSettings() {
+        let nav = UINavigationController(rootViewController: SettingsVC())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+    
+    func showMessages() {
+        
     }
 }

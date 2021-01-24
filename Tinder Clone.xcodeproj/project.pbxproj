@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311202C525BDDF3A00D679D4 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311202C425BDDF3A00D679D4 /* SettingsVC.swift */; };
+		311202CA25BDE34600D679D4 /* SettingsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311202C925BDE34600D679D4 /* SettingsHeader.swift */; };
 		31677FC925BA683100702814 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31677FC825BA683100702814 /* AppDelegate.swift */; };
 		31677FCB25BA683100702814 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31677FCA25BA683100702814 /* SceneDelegate.swift */; };
 		31677FD225BA683200702814 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31677FD125BA683200702814 /* Assets.xcassets */; };
@@ -53,6 +55,8 @@
 /* Begin PBXFileReference section */
 		2D4F3993C3B354703F395A5D /* Pods-Tinder Clone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder Clone.debug.xcconfig"; path = "Target Support Files/Pods-Tinder Clone/Pods-Tinder Clone.debug.xcconfig"; sourceTree = "<group>"; };
 		30F1C0FEA8B2951F468514A5 /* libPods-Tinder Clone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tinder Clone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		311202C425BDDF3A00D679D4 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		311202C925BDE34600D679D4 /* SettingsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeader.swift; sourceTree = "<group>"; };
 		31677FC525BA683100702814 /* Tinder Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tinder Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31677FC825BA683100702814 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31677FCA25BA683100702814 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 				3167802425BA6F9400702814 /* HomeNavigationStackView.swift */,
 				3167803725BA9EF100702814 /* BottomControlsStackView.swift */,
 				3167803F25BAA93500702814 /* CardView.swift */,
+				311202C925BDE34600D679D4 /* SettingsHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 			children = (
 				3167805725BCC07000702814 /* Authentication */,
 				3167801325BA6B5400702814 /* HomeVC.swift */,
+				311202C425BDDF3A00D679D4 /* SettingsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -435,10 +441,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				311202C525BDDF3A00D679D4 /* SettingsVC.swift in Sources */,
 				3167804A25BBFFE000702814 /* CardVM.swift in Sources */,
 				3167804025BAA93500702814 /* CardView.swift in Sources */,
 				3167801425BA6B5400702814 /* HomeVC.swift in Sources */,
 				3167806A25BCC74300702814 /* UITextField+.swift in Sources */,
+				311202CA25BDE34600D679D4 /* SettingsHeader.swift in Sources */,
 				3167807725BCCB4600702814 /* CustomButton.swift in Sources */,
 				31677FC925BA683100702814 /* AppDelegate.swift in Sources */,
 				3167806125BCC08800702814 /* SignInVC.swift in Sources */,
