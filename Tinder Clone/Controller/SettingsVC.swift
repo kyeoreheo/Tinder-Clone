@@ -10,6 +10,8 @@ import UIKit
 class SettingsVC: UITableViewController {
     // MARK:- Properties
     private let headerView = SettingsHeader()
+    private let imagePicker = UIImagePickerController()
+    private var imageIndex = 0
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -28,8 +30,14 @@ class SettingsVC: UITableViewController {
         
         tableView.separatorStyle = .none
         tableView.tableHeaderView = headerView
+        headerView.delegate = self
+        imagePicker.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
 
+    }
+    
+    func setHeaderImage(_ image: UIImage?) {
+        
     }
     
     // MARK:- Selectors
@@ -41,3 +49,21 @@ class SettingsVC: UITableViewController {
         
     }
 }
+
+// MARK:- Extensions
+extension SettingsVC: SettingsHeaderDelegate {
+    func settingsHeader(_ header: SettingsHeader, didSelect index: Int) {
+        imageIndex = index
+        present(imagePicker, animated: true)
+    }
+}
+
+extension SettingsVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let selectedImage = info[.originalImage] as? UIImage
+        
+        headerView.buttons[imageIndex].setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        dismiss(animated: true)
+    }
+}
+
