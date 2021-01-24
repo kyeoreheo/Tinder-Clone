@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Firebase
 
 class HomeVC: UIViewController {
     // MARK:- Properties
@@ -17,8 +18,10 @@ class HomeVC: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkIfUserIsLoggedIn()
         configureUI()
         configureCards()
+//        logOut()
     }
     
     // MARK:- Configure
@@ -54,6 +57,33 @@ class HomeVC: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+    }
+    
+    // MARK:- Helpers
+    func checkIfUserIsLoggedIn() {
+        if Auth.auth().currentUser == nil {
+            peresntLogInController()
+            print("DEBUG:- not logged in")
+        } else {
+            print("DEBUG:- logged in")
+        }
+    }
+    
+    func logOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            
+        }
+    }
+    
+    func peresntLogInController() {
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            let nav = UINavigationController(rootViewController: LogInVC())
+            nav.modalPresentationStyle = .fullScreen
+            strongSelf.present(nav, animated: true)
         }
     }
 }
