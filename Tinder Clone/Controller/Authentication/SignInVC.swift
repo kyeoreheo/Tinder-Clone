@@ -67,6 +67,7 @@ class SignInVC: UIViewController {
         }
         
         stackView.addArrangedSubview(registerButtton)
+        registerButtton.addTarget(self, action: #selector(handleRegisterUser), for: .touchUpInside)
         registerButtton.snp.makeConstraints { make in
             make.height.equalTo(50)
         }
@@ -102,7 +103,15 @@ class SignInVC: UIViewController {
     }
     
     @objc func handleRegisterUser() {
-        
+        guard let credential = viewModel.credentials() else { return }
+        AuthService.registerUser(credentials: credential) { error in
+            if let error = error {
+                print("DEBUG:- error registerUser")
+                return
+            }
+            
+            print("DEBUG:- Success")
+        }
     }
     
     @objc func handleShowLogIn() {
@@ -136,6 +145,8 @@ extension SignInVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         selectPhotoButton.layer.borderWidth = 3
         selectPhotoButton.layer.cornerRadius = 10
         selectPhotoButton.imageView?.contentMode = .scaleAspectFill
+        viewModel.profileImage = image
+        checkFormStatus()
         dismiss(animated: true)
     }
 }
