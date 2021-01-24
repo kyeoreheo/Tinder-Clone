@@ -92,6 +92,14 @@ class LogInVC: UIViewController {
     // MARK:- Selectors
     @objc func handleLogIn() {
         
+        AuthService.logUserIn(email: viewModel.email, password: viewModel.password) { [weak self] result, error in
+            guard let strongSelf = self else { return }
+            if let error = error {
+                print("DEBUG:- error logging in")
+                return
+            }
+            strongSelf.dismiss(animated: true)
+        }
     }
     
     @objc func handleSignIn() {

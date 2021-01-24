@@ -16,6 +16,10 @@ struct AuthCredentials {
 }
 
 class AuthService {
+    static func logUserIn(email: String, password: String, completion: AuthDataResultCallback?) {
+        Auth.auth().signIn(withEmail: email, password: password, completion: completion)
+    }
+    
     static func registerUser(credentials: AuthCredentials, completion: @escaping (Error?) -> Void) {
         print("DEBUG:- registerUser with Firebase")
         guard let image = credentials.profileImage else { return }

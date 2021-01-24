@@ -104,13 +104,14 @@ class SignInVC: UIViewController {
     
     @objc func handleRegisterUser() {
         guard let credential = viewModel.credentials() else { return }
-        AuthService.registerUser(credentials: credential) { error in
+        AuthService.registerUser(credentials: credential) { [weak self] error in
+            guard let strongSelf = self else { return }
             if let error = error {
                 print("DEBUG:- error registerUser")
                 return
             }
             
-            print("DEBUG:- Success")
+            strongSelf.dismiss(animated: true)
         }
     }
     
