@@ -9,6 +9,28 @@ import Firebase
 import UIKit
 
 class Service {
+    static func fetchUser(uid: String, completion: @escaping(User) -> Void) {
+        COLLECTION_USERS.document(uid).getDocument { snapshot, error in
+            guard let dictionary = snapshot?.data() else { return }
+            let user = User(dictionary: dictionary)
+            completion(user)
+            print("DEBUG:- snapshot \(snapshot?.data())")
+        }
+    }
+    
+    static func fetchUsers(completion: @escaping([User]) -> Void) {
+        var users = [User]()
+        COLLECTION_USERS.getDocuments { snapshot, error in
+            snapshot?.documents.forEach {
+                users.append(User(dictionary: $0.data()))
+                
+                if users.count == snapshot?.documents.count {
+                    completion(users)
+                }
+            }
+        }
+    }
+    
     static func uploadImage(image: UIImage, completion: @escaping(String) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
         let fileName = NSUUID().uuidString

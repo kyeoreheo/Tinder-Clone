@@ -15,29 +15,31 @@ class HomeVC: UIViewController {
     private let bottomStack = BottomControlsStackView()
     private let deckView = UIView()
     
+    private var viewModels = [CardVM]() {
+        didSet {
+            configureCards()
+        }
+    }
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
         configureUI()
         configureCards()
+        fetchUser()
+        fetchUsers()
 //        logOut()
     }
     
     // MARK:- Configure
     private func configureCards() {
-        let user1 = User(name: "Cat cat", age: 20, images: [#imageLiteral(resourceName: "jane1"),#imageLiteral(resourceName: "jane3")])
-        let user2 = User(name: "Dog Dog", age: 21, images: [#imageLiteral(resourceName: "kelly1"),#imageLiteral(resourceName: "kelly2"),#imageLiteral(resourceName: "lady5c")])
-        let cardView1 = CardView(viewModel: CardVM(user: user1))
-        let cardView2 = CardView(viewModel: CardVM(user: user2))
-        
-        deckView.addSubview(cardView1)
-        cardView1.snp.makeConstraints { make in
-            make.top.left.right.bottom.equalToSuperview()
-        }
-        deckView.addSubview(cardView2)
-        cardView2.snp.makeConstraints { make in
-            make.top.left.right.bottom.equalToSuperview()
+        viewModels.forEach {
+            let cardView = CardView(viewModel: $0)
+            deckView.addSubview(cardView)
+            cardView.snp.makeConstraints { make in
+                make.top.left.bottom.right.equalToSuperview()
+            }
         }
     }
     
@@ -61,6 +63,20 @@ class HomeVC: UIViewController {
     }
     
     // MARK:- Helpers
+    func fetchUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Service.fetchUser(uid: uid) { user in
+            
+        }
+    }
+    
+    func fetchUsers() {
+        Service.fetchUsers { [weak self] users in
+            guard let strongSelf = self else { return }
+            strongSelf.viewModels = users.map { CardVM(user: $0) }
+        }
+    }
+    
     func checkIfUserIsLoggedIn() {
         if Auth.auth().currentUser == nil {
             peresntLogInController()
