@@ -11,6 +11,8 @@ import Firebase
 
 class HomeVC: UIViewController {
     // MARK:- Properties
+    private var user: User?
+    
     private let topStack = HomeNavigationStackView()
     private let bottomStack = BottomControlsStackView()
     private let deckView = UIView()
@@ -66,8 +68,9 @@ class HomeVC: UIViewController {
     // MARK:- Helpers
     func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Service.fetchUser(uid: uid) { user in
-            
+        Service.fetchUser(uid: uid) { [weak self] user in
+            guard let strongSelf = self else { return }
+            strongSelf.user = user
         }
     }
     
@@ -107,7 +110,8 @@ class HomeVC: UIViewController {
 
 extension HomeVC: HomeNavigationStackViewDelegate {
     func showSettings() {
-        let nav = UINavigationController(rootViewController: SettingsVC())
+        guard let user = user else { return }
+        let nav = UINavigationController(rootViewController: SettingsVC(user: user))
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
     }

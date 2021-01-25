@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		311202C525BDDF3A00D679D4 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311202C425BDDF3A00D679D4 /* SettingsVC.swift */; };
 		311202CA25BDE34600D679D4 /* SettingsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311202C925BDE34600D679D4 /* SettingsHeader.swift */; };
+		311202D225BDF50600D679D4 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311202D125BDF50600D679D4 /* SettingCell.swift */; };
+		311202D725BDF60700D679D4 /* SettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311202D625BDF60700D679D4 /* SettingsVM.swift */; };
 		31677FC925BA683100702814 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31677FC825BA683100702814 /* AppDelegate.swift */; };
 		31677FCB25BA683100702814 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31677FCA25BA683100702814 /* SceneDelegate.swift */; };
 		31677FD225BA683200702814 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31677FD125BA683200702814 /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 		30F1C0FEA8B2951F468514A5 /* libPods-Tinder Clone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tinder Clone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		311202C425BDDF3A00D679D4 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		311202C925BDE34600D679D4 /* SettingsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeader.swift; sourceTree = "<group>"; };
+		311202D125BDF50600D679D4 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		311202D625BDF60700D679D4 /* SettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM.swift; sourceTree = "<group>"; };
 		31677FC525BA683100702814 /* Tinder Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tinder Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31677FC825BA683100702814 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31677FCA25BA683100702814 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 			children = (
 				3167804925BBFFE000702814 /* CardVM.swift */,
 				3167807B25BCD96400702814 /* AuthenticationVM.swift */,
+				311202D625BDF60700D679D4 /* SettingsVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				3167803725BA9EF100702814 /* BottomControlsStackView.swift */,
 				3167803F25BAA93500702814 /* CardView.swift */,
 				311202C925BDE34600D679D4 /* SettingsHeader.swift */,
+				311202D125BDF50600D679D4 /* SettingCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -452,11 +458,13 @@
 				3167806125BCC08800702814 /* SignInVC.swift in Sources */,
 				3167806F25BCC92600702814 /* CustomTextField.swift in Sources */,
 				3167807C25BCD96400702814 /* AuthenticationVM.swift in Sources */,
+				311202D225BDF50600D679D4 /* SettingCell.swift in Sources */,
 				3167805925BCC07D00702814 /* LogInVC.swift in Sources */,
 				3167802525BA6F9400702814 /* HomeNavigationStackView.swift in Sources */,
 				316780A925BD1D5C00702814 /* Service.swift in Sources */,
 				3167804525BBFF4C00702814 /* User.swift in Sources */,
 				31677FCB25BA683100702814 /* SceneDelegate.swift in Sources */,
+				311202D725BDF60700D679D4 /* SettingsVM.swift in Sources */,
 				3167803825BA9EF100702814 /* BottomControlsStackView.swift in Sources */,
 				3167801925BA6CC200702814 /* Extensions.swift in Sources */,
 				316780A425BD1D5400702814 /* AuthService.swift in Sources */,
