@@ -27,7 +27,10 @@ enum SettingsSections: Int, CaseIterable {
 
 class SettingVM {
     private let user: User
-    private let section: SettingsSections
+    public let section: SettingsSections
+    
+    let placeholderText: String
+    var value: String?
     
     public var shouldHideInputField: Bool {
         return section == .ageRange
@@ -37,9 +40,41 @@ class SettingVM {
         return section != .ageRange
     }
     
+    public func minAgeLabelText(forValue value: Float) -> String {
+         return "Min: \(Int(value))"
+    }
+    
+    public func maxAgeLabelText(forValue value: Float) -> String {
+         return "Max: \(Int(value))"
+    }
+    
+    var minAgeSliderValue: Float {
+//        guard let min = user.minSeekingAge else { return 18 }
+        return Float(user.minSeekingAge)
+    }
+    
+    var maxAgeSliderValue: Float {
+//        guard let max = user.maxSeekingAge else { return 60 }
+        return Float(user.maxSeekingAge)
+    }
+    
     init(user: User, section: SettingsSections) {
         self.user = user
         self.section = section
+        placeholderText = "Entery \(section.description.lowercased()).."
+        
+        switch section {
+        case .name:
+            value = user.name
+        case .age:
+            value = "\(user.age)"
+        case .profession:
+            value = user.profession
+        case .bio:
+            value = user.bio
+        case .ageRange:
+            break
+        }
     }
     
     

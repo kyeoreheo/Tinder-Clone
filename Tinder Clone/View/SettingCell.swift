@@ -7,8 +7,15 @@
 
 import UIKit
 
-class SettingCell: UITableViewCell {
+protocol SettingsCellDelegate: class {
+    func updateUserInfo(_ cell: SettingsCell, updateWith value: String, section: SettingsSections)
+    
+    func updateUserInfo(_ cell: SettingsCell, updateRange sender: UISlider)
+}
+
+class SettingsCell: UITableViewCell {
     // MARK:- Properties
+    weak var delegate: SettingsCellDelegate?
     var viewModel: SettingVM? {
         didSet { configure() }
     }
@@ -22,29 +29,31 @@ class SettingCell: UITableViewCell {
     // MARK:- Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .orange
-        
+        selectionStyle = .none
         addSubview(inputField)
         inputField.borderStyle = .none
         inputField.font = .systemFont(ofSize: 16)
         inputField.setLeftPaddingPoints(50)
         inputField.leftViewMode = .always
-        inputField.placeholder = "Enter value here.."
+        inputField.backgroundColor = .white
+        inputField.addTarget(self, action: #selector(textDidChange), for: .editingDidEnd)
         inputField.snp.makeConstraints { make in
+            make.height.equalTo(50)
             make.top.left.bottom.right.equalToSuperview()
         }
-//        inputField.addTarget(self, action: #selector(<#T##@objc method#>), for: .touchUpInside)
+        
         let minStack = UIStackView(arrangedSubviews: [minAgeLabel, minAgeSlider])
+        minAgeLabel.snp.makeConstraints { $0.width.equalTo(80) }
         minStack.spacing = 24
-        minAgeLabel.text = "Min: 18"
+//        minAgeLabel.text = "Min: 18"
         
         let maxStack = UIStackView(arrangedSubviews: [maxAgeLabel, maxAgeSlider])
-        minStack.spacing = 24
-        maxAgeLabel.text = "Max: 60"
+        maxAgeLabel.snp.makeConstraints { $0.width.equalTo(80) }
+        maxStack.spacing = 24
+//        maxAgeLabel.text = "Max: 60"
         
         sliderStack.addArrangedSubview(minStack)
         sliderStack.addArrangedSubview(maxStack)
-//        let sliderStack = UIStackView(arrangedSubviews: [minStack, maxStack])
         sliderStack.axis = .vertical
         sliderStack.spacing = 16
         addSubview(sliderStack)
@@ -63,6 +72,13 @@ class SettingCell: UITableViewCell {
         guard let viewModel = viewModel else { return }
         inputField.isHidden = viewModel.shouldHideInputField
         sliderStack.isHidden = viewModel.shouldHideSlider
+        inputField.placeholder = viewModel.placeholderText
+        inputField.text = viewModel.value
+        minAgeSlider.setValue(viewModel.minAgeSliderValue, animated: true)
+        minAgeLabel.text = viewModel.minAgeLabelText(forValue: viewModel.minAgeSliderValue)
+        maxAgeSlider.setValue(viewModel.maxAgeSliderValue, animated: true)
+        maxAgeLabel.text = viewModel.maxAgeLabelText(forValue: viewModel.maxAgeSliderValue)
+
     }
     
     func createAgeRangeSlider() -> UISlider {
@@ -74,7 +90,19 @@ class SettingCell: UITableViewCell {
     }
     
     // MARK:- Selectors
-    @objc func handleAgeRangeChanged() {
-        
+    @objc func handleAgeRangeChanged(sender: UISlider) {
+        if sender == minAgeSlider {
+            minAgeLabel.text = viewModel?.minAgeLabelText(forValue: sender.value)
+        } else {
+            maxAgeLabel.text = viewModel?.maxAgeLabelText(forValue: sender.value)
+        }
+        delegate?.updateUserInfo(self, updateRange: sender)
+    }
+    
+    @objc func textDidChange(sender: UITextField) {
+        guard let value = sender.text,
+              let viewModel = viewModel
+        else { return }
+        delegate?.updateUserInfo(self, updateWith: value, section: viewModel.section)
     }
 }

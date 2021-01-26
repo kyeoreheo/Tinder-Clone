@@ -11,7 +11,7 @@ class CardVM {
     public let user: User
     public let userInfoText: NSAttributedString
     public var imageToShow: UIImage?
-    public var imageURL: URL?
+    public var imageURLs: [String]
 
     private var imageIndex = 0
     
@@ -22,7 +22,7 @@ class CardVM {
         attributedText.append(NSMutableAttributedString(string: " \(user.age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light), .foregroundColor: UIColor.white]))
         self.userInfoText = attributedText
         
-        self.imageURL = URL(string: user.profileImageUrl)
+        self.imageURLs = user.imageURLs
     }
     
     func showNextPhoto() {

@@ -111,12 +111,22 @@ class HomeVC: UIViewController {
 extension HomeVC: HomeNavigationStackViewDelegate {
     func showSettings() {
         guard let user = user else { return }
-        let nav = UINavigationController(rootViewController: SettingsVC(user: user))
+        let controller = SettingsVC(user: user)
+        controller.delegate = self
+        let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
     }
     
     func showMessages() {
         
+    }
+}
+
+extension HomeVC: SettingsControllerDelegate {
+    func settingsController(_ controller: SettingsVC, updateWith user: User) {
+        print("DEBUG:- delegate \(user.self)")
+        controller.dismiss(animated: true)
+        self.user = user
     }
 }

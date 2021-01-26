@@ -9,13 +9,18 @@ import UIKit
 
 private let reuseIdentifier = "SettingsCell"
 
+protocol SettingsControllerDelegate: class {
+    func settingsController(_ controller: SettingsVC, updateWith user: User)
+}
+
 class SettingsVC: UITableViewController {
     // MARK:- Properties
     private let headerView = SettingsHeader()
     private let imagePicker = UIImagePickerController()
     private var imageIndex = 0
     
-    private let user: User
+    private var user: User
+    weak var delegate: SettingsControllerDelegate?
     
     init(user: User) {
         self.user = user
@@ -47,7 +52,7 @@ class SettingsVC: UITableViewController {
         headerView.delegate = self
         
         imagePicker.delegate = self
-        tableView.register(SettingCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
 
     }
@@ -62,7 +67,9 @@ class SettingsVC: UITableViewController {
     }
     
     @objc func handleDone() {
-        
+        view.endEditing(true)
+
+        delegate?.settingsController(self, updateWith: user)
     }
 }
 
@@ -95,11 +102,13 @@ extension SettingsVC {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? SettingCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? SettingsCell,
               let section = SettingsSections(rawValue: indexPath.section)
         else { return UITableViewCell() }
         let viewModel = SettingVM(user: user, section: section)
         cell.viewModel = viewModel
+        cell.contentView.isUserInteractionEnabled = false
+        cell.delegate = self
         return cell
     }
 }
@@ -119,4 +128,30 @@ extension SettingsVC {
         guard let section = SettingsSections(rawValue: indexPath.section) else { return 0 }
         return section == .ageRange ? 96 : 44
     }
+}
+
+extension SettingsVC: SettingsCellDelegate {
+    func updateUserInfo(_ cell: SettingsCell, updateRange sender: UISlider) {
+        if sender == cell.minAgeSlider {
+            user.minSeekingAge = Int(sender.value)
+        } else {
+            user.maxSeekingAge = Int(sender.value)
+        }
+    }
+    
+    func updateUserInfo(_ cell: SettingsCell, updateWith value: String, section: SettingsSections) {
+        switch section {
+        case .name:
+            user.name = value
+        case .profession:
+            user.profession = value
+        case .age:
+            user.age = Int(value) ?? 18
+        case .bio:
+            user.bio = value
+        case .ageRange:
+            break;
+        }
+    }
+
 }

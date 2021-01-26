@@ -54,7 +54,10 @@ class CardView: UIView {
         
         addSubview(profileImageView)
         profileImageView.contentMode = .scaleAspectFill
-        profileImageView.sd_setImage(with: viewModel.imageURL)
+        if let urlString = URL(string: viewModel.imageURLs.first?) {
+            profileImageView.sd_setImage(with: imageURL)
+        }
+//        profileImageView.sd_setImage(with: viewModel.imageURL)
         profileImageView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }

@@ -32,7 +32,7 @@ class AuthService {
                 guard let uid = result?.user.uid else { return }
                 let data = ["email" : credentials.email,
                             "fullName": credentials.fullName,
-                            "imageURL": imageURL,
+                            "imageURLs": [imageURL],
                             "uid": uid,
                             "age": 21] as [String: Any]
                 COLLECTION_USERS.document(uid).setData(data, completion: completion)

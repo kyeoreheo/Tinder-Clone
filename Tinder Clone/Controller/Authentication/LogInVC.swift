@@ -30,7 +30,7 @@ class LogInVC: UIViewController {
     private func configureUI() {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
-        view.backgroundColor = .orange
+        view.backgroundColor = .white
         
         view.addSubview(logoImageView)
         logoImageView.image = #imageLiteral(resourceName: "app_icon").withRenderingMode(.alwaysTemplate)
